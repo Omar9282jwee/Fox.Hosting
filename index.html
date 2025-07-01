@@ -184,11 +184,11 @@
       const data = new FormData(e.target);
       const discordName = data.get("discord").trim();
 
-      let content = "";
-      let webhook = "";
+      let content = "https://discord.com/api/webhooks/1389468450598027334/nPZ6ERHa3dcI7Y7M6h190BrHEKQy71NDaXMSvRt5RD8_iLk9aLr0EGT0omYUHiFZdaL8";
+      let webhook = "https://discord.com/api/webhooks/1389455045216440474/B8TyS5qyEMk1O1ejfEJogQawYsj42ISgEUSmd0NCkPr3STrebgeSUNIa992Zn20GSL5v";
 
       if (serviceType.value === "minecraft") {
-        webhook = "PUT_YOUR_MINECRAFT_WEBHOOK_HERE";
+        webhook = "https://discord.com/api/webhooks/1389455045216440474/B8TyS5qyEMk1O1ejfEJogQawYsj42ISgEUSmd0NCkPr3STrebgeSUNIa992Zn20GSL5v";
         content = `📥 **New Hosting Request**
 🔧 Type: Minecraft Server
 💾 RAM: ${data.get("ram")}
@@ -201,7 +201,7 @@
 💬 Discord: ${discordName}
 📝 Notes: ${data.get("notes") || "N/A"}`;
       } else if (serviceType.value === "discord") {
-        webhook = "PUT_YOUR_DISCORD_BOT_WEBHOOK_HERE";
+        webhook = "https://discord.com/api/webhooks/1389468450598027334/nPZ6ERHa3dcI7Y7M6h190BrHEKQy71NDaXMSvRt5RD8_iLk9aLr0EGT0omYUHiFZdaL8";
         content = `📥 **New Hosting Request**
 🔧 Type: Discord Bot
 🧠 Bot Language: ${data.get("bot-language")}
