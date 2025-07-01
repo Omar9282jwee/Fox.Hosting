@@ -356,7 +356,19 @@
         console.error(err);
       });
     });
+  </
+  </script>
+  window.addEventListener("DOMContentLoaded", () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const discordName = urlParams.get("discord");
+
+    if (discordName) {
+      const input = document.querySelector('input[placeholder*="Discord Username"]');
+      if (input) {
+        input.value = discordName;
+      }
+    }
+  });
   </script>
 </body>
-      </html>
-  
+</html>
