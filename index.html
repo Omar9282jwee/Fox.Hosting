@@ -277,8 +277,8 @@
 
       const requestData = {
         content: `📥 **New Hosting Request**\n
-🔧 Type: ${serviceType.value === "minecraft" ? "Minecraft Server" : "Discord Bot"}\n
- Game: ${data.get("game")}\n RAM: ${data.get("ram")}\n CPU: ${data.get("cpu")}\n Disk: ${data.get("disk")}\n Version: ${data.get("version")}\n Software: ${data.get("software")}\n Paper Build: ${data.get("paperBuild") || "N/A"}\n Java: ${data.get("java")}\n Discord: ${discordName}\n Notes: ${data.get("notes") || "N/A"}`
+🔧 Type: ${serviceType.value === "minecraft" ? "Minecraft Server" : "Discord Bot"}\n Game: ${data.get("game")}\n RAM: ${data.get("ram")}\n CPU: ${data.get("cpu")}\n Disk: ${data.get("disk")}\n Version: ${data.get("version")}\n Software: ${data.get("software")}\n Paper Build: ${data.get("paperBuild") || "N/A"}\n Java: ${data.get("java")}\n Discord: ${discordName}\n Notes: ${data.get("notes") || "N/A"}`
+🎮 Game: ${data.get("game")}\n💾 RAM: ${data.get("ram")}\n🧠 CPU: ${data.get("cpu")}\n💽 Disk: ${data.get("disk")}\n🧱 Version: ${data.get("version")}\n⚙️ Software: ${data.get("software")}\n📦 Paper Build: ${data.get("paperBuild") || "N/A"}\n☕ Java: ${data.get("java")}\n💬 Discord: ${discordName}\n📝 Notes: ${data.get("notes") || "N/A"}`
       };
 
       fetch("https://discord.com/api/webhooks/1389245956746379396/https://discord.com/api/webhooks/1389455045216440474/B8TyS5qyEMk1O1ejfEJogQawYsj42ISgEUSmd0NCkPr3STrebgeSUNIa992Zn20GSL5v", {
