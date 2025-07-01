@@ -70,23 +70,28 @@
   <div class="form-container">
     <h2>🔥 Fox Hosting 🔥</h2>
     <form id="serverRequestForm">
+
       <select id="serviceType" required>
         <option value="">Select Service</option>
         <option value="minecraft">Minecraft Server</option>
         <option value="discord">Discord Bot</option>
       </select>
 
-      <!-- Minecraft Fields -->
+      <!-- Minecraft Section -->
       <div id="minecraft-fields">
         <select name="ram">
           <option value="">Select RAM</option>
           <option>2GB</option>
           <option>3GB</option>
           <option>4GB</option>
-          <option>5GB</option>
-          <option>6GB</option>
-          <option>7GB</option>
-          <option>8GB</option>
+          <option>5GB premium</option>
+          <option>6GB premium</option>
+          <option>7GB premium</option>
+          <option>8GB premium</option>
+          <option>9GB premium</option>
+          <option>10GB premium</option>
+          <option>15GB premium</option>
+          <option>20GB premium</option>
         </select>
 
         <select name="cpu">
@@ -95,51 +100,146 @@
           <option>2 Cores</option>
           <option>3 Cores</option>
           <option>4 Cores</option>
-          <option>5 Cores</option>
-          <option>6 Cores</option>
-          <option>7 Cores</option>
-          <option>8 Cores</option>
+          <option>5 Cores premium</option>
+          <option>6 Cores premium</option>
+          <option>7 Cores premium</option>
+          <option>8 Cores premium</option>
         </select>
 
         <select name="disk">
           <option value="">Select Disk Space</option>
           <option>5GB</option>
           <option>10GB</option>
-          <option>15GB</option>
-          <option>20GB</option>
-          <option>25GB</option>
+          <option>15GB premium</option>
+          <option>20GB premium</option>
+          <option>25GB premium</option>
+          <option>30GB premium</option>
+          <option>35GB premium</option>
+          <option>40GB premium</option>
+          <option>45GB premium</option>
+          <option>50GB premium</option>
         </select>
 
         <select name="version">
           <option value="">Select Minecraft Version</option>
           <option>1.21.5</option>
           <option>1.21.4</option>
-          <!-- Add more versions as needed -->
+          <option>1.21.3</option>
+          <option>1.21.1</option>
+          <option>1.21</option>
+          <option>1.20.6</option>
+          <option>1.20.5</option>
+          <option>1.20.4</option>
+          <option>1.20.2</option>
+          <option>1.20.1</option>
+          <option>1.19.4</option>
+          <option>1.19.3</option>
+          <option>1.19.2</option>
+          <option>1.19.1</option>
+          <option>1.19</option>
+          <option>1.18.2</option>
+          <option>1.18.1</option>
+          <option>1.18</option>
+          <option>1.17.1</option>
+          <option>1.17</option>
+          <option>1.16.5</option>
+          <option>1.16.4</option>
+          <option>1.16.3</option>
+          <option>1.16.2</option>
+          <option>1.16.1</option>
+          <option>1.15.2</option>
+          <option>1.15.1</option>
+          <option>1.15</option>
+          <option>1.14.4</option>
+          <option>1.14.3</option>
+          <option>1.14.2</option>
+          <option>1.14.1</option>
+          <option>1.14</option>
+          <option>1.13.2</option>
+          <option>1.13.1</option>
+          <option>1.13</option>
+          <option>1.12.2</option>
+          <option>1.12.1</option>
+          <option>1.12</option>
+          <option>1.11.2</option>
+          <option>1.10.2</option>
+          <option>1.9.4</option>
+          <option>1.8.9</option>
+          <option>1.8.8</option>
         </select>
 
         <select name="software" id="softwareSelect" required>
           <option value="">Select Server Software</option>
           <option value="Paper">Paper</option>
+          <option>Fabric</option>
+          <option>Forge</option>
+          <option>NeoForge</option>
+          <option>Nukkit</option>
+          <option>Purpur</option>
+          <option>Quilt</option>
           <option>Spigot</option>
           <option>Vanilla</option>
-          <!-- Add more software options -->
+          <option>Velocity</option>
         </select>
 
         <select name="paperBuild" id="paper-builds">
+                    <option>1.21.5 - 25</option>
           <option>1.21.4 - 226</option>
+          <option>1.21.3 - 83</option>
+          <option>1.21.1 - 133</option>
+          <option>1.21 - 130</option>
+          <option>1.20.6 - 151</option>
+          <option>1.20.5 - 22</option>
           <option>1.20.4 - 499</option>
-          <!-- Add more builds -->
+          <option>1.20.2 - 318</option>
+          <option>1.20.1 - 196</option>
+          <option>1.20 - 17</option>
+          <option>1.19.4 - 550</option>
+          <option>1.19.3 - 448</option>
+          <option>1.19.2 - 307</option>
+          <option>1.19.1 - 111</option>
+          <option>1.19 - 81</option>
+          <option>1.18.2 - 388</option>
+          <option>1.18.1 - 216</option>
+          <option>1.18 - 66</option>
+          <option>1.17.1 - 411</option>
+          <option>1.17 - 79</option>
+          <option>1.16.5 - 794</option>
+          <option>1.16.4 - 416</option>
+          <option>1.16.3 - 253</option>
+          <option>1.16.2 - 189</option>
+          <option>1.16.1 - 138</option>
+          <option>1.15.2 - 393</option>
+          <option>1.15.1 - 62</option>
+          <option>1.15 - 21</option>
+          <option>1.14.4 - 245</option>
+          <option>1.14.3 - 134</option>
+          <option>1.14.2 - 107</option>
+          <option>1.14.1 - 50</option>
+          <option>1.14 - 17</option>
+          <option>1.13.2 - 657</option>
+          <option>1.13.1 - 386</option>
+          <option>1.13 - 173</option>
+          <option>1.12.2 - 1620</option>
+          <option>1.12.1 - 1204</option>
+          <option>1.12 - 1169</option>
+          <option>1.11.2 - 1106</option>
+          <option>1.10.2 - 918</option>
+          <option>1.9.4 - 775</option>
+          <option>1.8.8 - 445</option>
         </select>
 
         <select name="java" required>
           <option value="">Select Java Version</option>
           <option>Java 21</option>
           <option>Java 17</option>
+          <option>Java 16</option>
           <option>Java 11</option>
+          <option>Java 8</option>
         </select>
       </div>
 
-      <!-- Discord Fields -->
+      <!-- Discord Bot Section -->
       <div id="discord-fields">
         <select name="bot-language">
           <option value="">Select Bot Language</option>
@@ -153,8 +253,8 @@
         </select>
       </div>
 
-      <input type="text" name="discord" placeholder="Discord Username" required />
-      <textarea name="notes" placeholder="Your message or notes..." rows="4"></textarea>
+      <input type="text" name="discord" placeholder="Discord Username اسم حسابك في الديسكورد" required />
+      <textarea name="notes" placeholder="للمعلومه لازم يكون عندك حساب في الديسكورد عشان يديك الباسورد والايميل ودوس على كلمه دعم اللي تحت لو انت عايز تكلم الدعم" rows="4"></textarea>
       <button type="submit">Send Request</button>
     </form>
 
@@ -184,36 +284,16 @@
       const data = new FormData(e.target);
       const discordName = data.get("discord").trim();
 
-      let content = "https://discord.com/api/webhooks/1389468450598027334/nPZ6ERHa3dcI7Y7M6h190BrHEKQy71NDaXMSvRt5RD8_iLk9aLr0EGT0omYUHiFZdaL8";
-      let webhook = "https://discord.com/api/webhooks/1389455045216440474/B8TyS5qyEMk1O1ejfEJogQawYsj42ISgEUSmd0NCkPr3STrebgeSUNIa992Zn20GSL5v";
+      const requestData = {
+        content: `📥 **New Hosting Request**\n
+🔧 Type: ${serviceType.value === "minecraft" ? "Minecraft Server" : "Discord Bot"}\n
+💾 RAM: ${data.get("ram")}\n🧠 CPU: ${data.get("cpu")}\n💽 Disk: ${data.get("disk")}\n🧱 Version: ${data.get("version")}\n⚙️ Software: ${data.get("software")}\n📦 Paper Build: ${data.get("paperBuild") || "N/A"}\n☕ Java: ${data.get("java")}\n💬 Discord: ${discordName}\n📝 Notes: ${data.get("notes") || "N/A"}`
+      };
 
-      if (serviceType.value === "minecraft") {
-        webhook = "https://discord.com/api/webhooks/1389455045216440474/B8TyS5qyEMk1O1ejfEJogQawYsj42ISgEUSmd0NCkPr3STrebgeSUNIa992Zn20GSL5v";
-        content = `📥 **New Hosting Request**
-🔧 Type: Minecraft Server
-💾 RAM: ${data.get("ram")}
-🧠 CPU: ${data.get("cpu")}
-💽 Disk: ${data.get("disk")}
-🧱 Version: ${data.get("version")}
-⚙️ Software: ${data.get("software")}
-📦 Paper Build: ${data.get("paperBuild") || "N/A"}
-☕ Java: ${data.get("java")}
-💬 Discord: ${discordName}
-📝 Notes: ${data.get("notes") || "N/A"}`;
-      } else if (serviceType.value === "discord") {
-        webhook = "https://discord.com/api/webhooks/1389468450598027334/nPZ6ERHa3dcI7Y7M6h190BrHEKQy71NDaXMSvRt5RD8_iLk9aLr0EGT0omYUHiFZdaL8";
-        content = `📥 **New Hosting Request**
-🔧 Type: Discord Bot
-🧠 Bot Language: ${data.get("bot-language")}
-💾 Specs: ${data.get("ram-discord")}
-💬 Discord: ${discordName}
-📝 Notes: ${data.get("notes") || "N/A"}`;
-      }
-
-      fetch(webhook, {
+      fetch("https://discord.com/api/webhooks/1389455045216440474/B8TyS5qyEMk1O1ejfEJogQawYsj42ISgEUSmd0NCkPr3STrebgeSUNIa992Zn20GSL5v", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ content })
+        body: JSON.stringify(requestData)
       }).then(() => {
         alert("✅ Sent successfully!");
         e.target.reset();
@@ -227,5 +307,4 @@
     });
   </script>
 </body>
-            </html>
-  
+  </html>
