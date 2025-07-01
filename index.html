@@ -70,14 +70,13 @@
   <div class="form-container">
     <h2>🔥 Fox Hosting 🔥</h2>
     <form id="serverRequestForm">
-
       <select id="serviceType" required>
         <option value="">Select Service</option>
         <option value="minecraft">Minecraft Server</option>
         <option value="discord">Discord Bot</option>
       </select>
 
-      <!-- Minecraft Section -->
+      <!-- Minecraft Fields -->
       <div id="minecraft-fields">
         <select name="ram">
           <option value="">Select RAM</option>
@@ -115,28 +114,21 @@
           <option value="">Select Minecraft Version</option>
           <option>1.21.5</option>
           <option>1.21.4</option>
-          <option>1.21.3</option>
-          <option>1.21.1</option>
-          <option>1.21</option>
+          <!-- Add more versions as needed -->
         </select>
 
         <select name="software" id="softwareSelect" required>
           <option value="">Select Server Software</option>
           <option value="Paper">Paper</option>
-          <option>Fabric</option>
-          <option>Forge</option>
-          <option>NeoForge</option>
-          <option>Nukkit</option>
-          <option>Purpur</option>
-          <option>Quilt</option>
           <option>Spigot</option>
           <option>Vanilla</option>
-          <option>Velocity</option>
+          <!-- Add more software options -->
         </select>
 
         <select name="paperBuild" id="paper-builds">
-          <option>1.21.5 - 25</option>
           <option>1.21.4 - 226</option>
+          <option>1.20.4 - 499</option>
+          <!-- Add more builds -->
         </select>
 
         <select name="java" required>
@@ -144,11 +136,10 @@
           <option>Java 21</option>
           <option>Java 17</option>
           <option>Java 11</option>
-          <option>Java 8</option>
         </select>
       </div>
 
-      <!-- Discord Bot Section -->
+      <!-- Discord Fields -->
       <div id="discord-fields">
         <select name="bot-language">
           <option value="">Select Bot Language</option>
@@ -163,7 +154,7 @@
       </div>
 
       <input type="text" name="discord" placeholder="Discord Username" required />
-      <textarea name="notes" placeholder="Any notes..." rows="4"></textarea>
+      <textarea name="notes" placeholder="Your message or notes..." rows="4"></textarea>
       <button type="submit">Send Request</button>
     </form>
 
@@ -194,21 +185,32 @@
       const discordName = data.get("discord").trim();
 
       let content = "";
+      let webhook = "";
 
       if (serviceType.value === "minecraft") {
-        content = `📥 **New Hosting Request**\n
-🔧 Type: Minecraft Server\n
-💾 RAM: ${data.get("ram")}\n🧠 CPU: ${data.get("cpu")}\n💽 Disk: ${data.get("disk")}\n🧱 Version: ${data.get("version")}\n⚙️ Software: ${data.get("software")}\n📦 Paper Build: ${data.get("paperBuild") || "N/A"}\n☕ Java: ${data.get("java")}\n💬 Discord: ${discordName}\n📝 Notes: ${data.get("notes") || "N/A"}`;
+        webhook = "PUT_YOUR_MINECRAFT_WEBHOOK_HERE";
+        content = `📥 **New Hosting Request**
+🔧 Type: Minecraft Server
+💾 RAM: ${data.get("ram")}
+🧠 CPU: ${data.get("cpu")}
+💽 Disk: ${data.get("disk")}
+🧱 Version: ${data.get("version")}
+⚙️ Software: ${data.get("software")}
+📦 Paper Build: ${data.get("paperBuild") || "N/A"}
+☕ Java: ${data.get("java")}
+💬 Discord: ${discordName}
+📝 Notes: ${data.get("notes") || "N/A"}`;
       } else if (serviceType.value === "discord") {
-        content = `📥 **New Hosting Request**\n
-🔧 Type: Discord Bot\n
-🧠 Bot Language: ${data.get("bot-language")}\n
-💾 Specs: ${data.get("ram-discord")}\n
-💬 Discord: ${discordName}\n
+        webhook = "PUT_YOUR_DISCORD_BOT_WEBHOOK_HERE";
+        content = `📥 **New Hosting Request**
+🔧 Type: Discord Bot
+🧠 Bot Language: ${data.get("bot-language")}
+💾 Specs: ${data.get("ram-discord")}
+💬 Discord: ${discordName}
 📝 Notes: ${data.get("notes") || "N/A"}`;
       }
 
-      fetch("https://discord.com/api/webhooks/1389455045216440474/B8TyS5qyEMk1O1ejfEJogQawYsj42ISgEUSmd0NCkPr3STrebgeSUNIa992Zn20GSL5v", {
+      fetch(webhook, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ content })
@@ -225,5 +227,5 @@
     });
   </script>
 </body>
-                                                     </html>
+            </html>
   
