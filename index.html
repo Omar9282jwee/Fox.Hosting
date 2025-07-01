@@ -1,261 +1,301 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Fox hosting - Minecraft & Discord Bots</title>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet" />
-<style>
-  body {
-    margin: 0;
-    font-family: "Orbitron", sans-serif;
-    background: linear-gradient(to bottom right, #111, #330000);
-    color: white;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  .container {
-    display: flex;
-    gap: 20px;
-    width: 95%;
-    max-width: 1100px;
-    padding: 20px;
-  }
-  form {
-    background: rgba(0, 0, 0, 0.8);
-    padding: 25px;
-    border-radius: 16px;
-    box-shadow: 0 0 25px red;
-    flex: 1;
-    max-height: 90vh;
-    overflow-y: auto;
-  }
-  h2 {
-    text-align: center;
-    color: red;
-    margin-bottom: 20px;
-  }
-  input, select, textarea, button {
-    width: 100%;
-    padding: 12px;
-    margin-bottom: 15px;
-    background: #1a1a1a;
-    border: 1px solid red;
-    color: white;
-    border-radius: 8px;
-  }
-  button {
-    background: red;
-    border: none;
-    font-weight: bold;
-    cursor: pointer;
-  }
-  button:hover {
-    background: darkred;
-  }
-  .support-link {
-    text-align: center;
-    margin-top: 10px;
-  }
-  .support-link a {
-    color: red;
-    text-decoration: underline;
-    font-weight: bold;
-  }
-  #paper-builds {
-    display: none;
-  }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fox Hosting</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Orbitron', sans-serif;
+      background: linear-gradient(to bottom right, #111, #330000);
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .form-container {
+      background: rgba(0, 0, 0, 0.85);
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 0 25px red;
+      width: 100%;
+      max-width: 520px;
+      overflow-y: auto;
+      max-height: 95vh;
+    }
+    h2 {
+      text-align: center;
+      color: red;
+      margin-bottom: 20px;
+    }
+    input, select, textarea, button {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      background: #1a1a1a;
+      border: 1px solid red;
+      color: white;
+      border-radius: 8px;
+    }
+    button {
+      background: red;
+      border: none;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    button:hover {
+      background: darkred;
+    }
+    .support-link {
+      text-align: center;
+      margin-top: 10px;
+    }
+    .support-link a {
+      color: red;
+      text-decoration: underline;
+      font-weight: bold;
+    }
+    #minecraft-fields, #discord-fields {
+      display: none;
+    }
+    #paper-builds {
+      display: none;
+    }
+  </style>
 </head>
 <body>
-  <div class="container">
-    <!-- القائمة الأولى: طلب سيرفر ماينكرافت -->
-    <form id="formMinecraft">
-      <h2>🔥 طلب سيرفر Minecraft 🔥</h2>
-      <input type="text" name="serverName" placeholder="اسم السيرفر Server Name" required />
-      <select name="ram" required>
-        <option value="">Select RAM</option>
-        <option>2GB</option>
-        <option>3GB</option>
-        <option>4GB</option>
-        <option>5GB</option>
-        <option>6GB</option>
-        <option>7GB</option>
-        <option>8GB</option>
+  <div class="form-container">
+    <h2>🔥 Fox Hosting 🔥</h2>
+    <form id="serverRequestForm">
+
+      <select id="serviceType" required>
+        <option value="">Select Service</option>
+        <option value="minecraft">Minecraft Server</option>
+        <option value="discord">Discord Bot</option>
       </select>
-      <select name="cpu" required>
-        <option value="">Select CPU</option>
-        <option>1 Core</option>
-        <option>2 Cores</option>
-        <option>3 Cores</option>
-        <option>4 Cores</option>
-        <option>5 Cores</option>
-        <option>6 Cores</option>
-        <option>7 Cores</option>
-        <option>8 Cores</option>
-      </select>
-      <select name="disk" required>
-        <option value="">Select Disk Space</option>
-        <option>5GB</option>
-        <option>10GB</option>
-        <option>15GB</option>
-        <option>20GB</option>
-        <option>25GB</option>
-      </select>
-      <select name="version" required>
-        <option value="">Select Minecraft Version</option>
-        <option>1.21.5</option>
-        <option>1.21.4</option>
-        <option>1.21.3</option>
-        <option>1.21.1</option>
-        <option>1.21</option>
-        <!-- ممكن تضيف باقي الإصدارات -->
-      </select>
-      <select name="software" id="softwareSelect" required>
-        <option value="">Select Server Software</option>
-        <option value="Paper">Paper</option>
-        <option>Fabric</option>
-        <option>Forge</option>
-        <option>NeoForge</option>
-        <option>Nukkit</option>
-        <option>Purpur</option>
-        <option>Quilt</option>
-        <option>Spigot</option>
-        <option>Vanilla</option>
-        <option>Velocity</option>
-      </select>
-      <select name="paperBuild" id="paper-builds">
-        <option value="">Select Paper Build</option>
-        <option>1.21.5 - 25</option>
-        <option>1.21.4 - 226</option>
-        <!-- باقي الخيارات -->
-      </select>
-      <select name="java" required>
-        <option value="">Select Java Version</option>
-        <option>Java 21</option>
-        <option>Java 17</option>
-        <option>Java 16</option>
-        <option>Java 11</option>
-        <option>Java 8</option>
-      </select>
-      <input type="text" name="discord" placeholder="Discord user اسم حسابك في الديسكورد للتواصل معك" required />
-      <textarea
-        name="notes"
-        placeholder="اي تفاصيل زياده اكتبها هنا اي حاجه انت عاوزها زياده"
-        rows="4"
-      ></textarea>
-      <button type="submit">إرسال طلب سيرفر</button>
+
+      <!-- Minecraft Section -->
+      <div id="minecraft-fields">
+        <select name="ram">
+          <option value="">Select RAM</option>
+          <option>2GB</option>
+          <option>3GB</option>
+          <option>4GB</option>
+          <option>5GB</option>
+          <option>6GB</option>
+          <option>7GB</option>
+          <option>8GB</option>
+        </select>
+
+        <select name="cpu">
+          <option value="">Select CPU</option>
+          <option>1 Core</option>
+          <option>2 Cores</option>
+          <option>3 Cores</option>
+          <option>4 Cores</option>
+          <option>5 Cores</option>
+          <option>6 Cores</option>
+          <option>7 Cores</option>
+          <option>8 Cores</option>
+        </select>
+
+        <select name="disk">
+          <option value="">Select Disk Space</option>
+          <option>5GB</option>
+          <option>10GB</option>
+          <option>15GB</option>
+          <option>20GB</option>
+          <option>25GB</option>
+        </select>
+
+        <select name="version">
+          <option value="">Select Minecraft Version</option>
+          <option>1.21.5</option>
+          <option>1.21.4</option>
+          <option>1.21.3</option>
+          <option>1.21.1</option>
+          <option>1.21</option>
+          <option>1.20.6</option>
+          <option>1.20.5</option>
+          <option>1.20.4</option>
+          <option>1.20.2</option>
+          <option>1.20.1</option>
+          <option>1.19.4</option>
+          <option>1.19.3</option>
+          <option>1.19.2</option>
+          <option>1.19.1</option>
+          <option>1.19</option>
+          <option>1.18.2</option>
+          <option>1.18.1</option>
+          <option>1.18</option>
+          <option>1.17.1</option>
+          <option>1.17</option>
+          <option>1.16.5</option>
+          <option>1.16.4</option>
+          <option>1.16.3</option>
+          <option>1.16.2</option>
+          <option>1.16.1</option>
+          <option>1.15.2</option>
+          <option>1.15.1</option>
+          <option>1.15</option>
+          <option>1.14.4</option>
+          <option>1.14.3</option>
+          <option>1.14.2</option>
+          <option>1.14.1</option>
+          <option>1.14</option>
+          <option>1.13.2</option>
+          <option>1.13.1</option>
+          <option>1.13</option>
+          <option>1.12.2</option>
+          <option>1.12.1</option>
+          <option>1.12</option>
+          <option>1.11.2</option>
+          <option>1.10.2</option>
+          <option>1.9.4</option>
+          <option>1.8.9</option>
+          <option>1.8.8</option>
+        </select>
+
+        <select name="software" id="softwareSelect" required>
+          <option value="">Select Server Software</option>
+          <option value="Paper">Paper</option>
+          <option>Fabric</option>
+          <option>Forge</option>
+          <option>NeoForge</option>
+          <option>Nukkit</option>
+          <option>Purpur</option>
+          <option>Quilt</option>
+          <option>Spigot</option>
+          <option>Vanilla</option>
+          <option>Velocity</option>
+        </select>
+
+        <select name="paperBuild" id="paper-builds">
+                    <option>1.21.5 - 25</option>
+          <option>1.21.4 - 226</option>
+          <option>1.21.3 - 83</option>
+          <option>1.21.1 - 133</option>
+          <option>1.21 - 130</option>
+          <option>1.20.6 - 151</option>
+          <option>1.20.5 - 22</option>
+          <option>1.20.4 - 499</option>
+          <option>1.20.2 - 318</option>
+          <option>1.20.1 - 196</option>
+          <option>1.20 - 17</option>
+          <option>1.19.4 - 550</option>
+          <option>1.19.3 - 448</option>
+          <option>1.19.2 - 307</option>
+          <option>1.19.1 - 111</option>
+          <option>1.19 - 81</option>
+          <option>1.18.2 - 388</option>
+          <option>1.18.1 - 216</option>
+          <option>1.18 - 66</option>
+          <option>1.17.1 - 411</option>
+          <option>1.17 - 79</option>
+          <option>1.16.5 - 794</option>
+          <option>1.16.4 - 416</option>
+          <option>1.16.3 - 253</option>
+          <option>1.16.2 - 189</option>
+          <option>1.16.1 - 138</option>
+          <option>1.15.2 - 393</option>
+          <option>1.15.1 - 62</option>
+          <option>1.15 - 21</option>
+          <option>1.14.4 - 245</option>
+          <option>1.14.3 - 134</option>
+          <option>1.14.2 - 107</option>
+          <option>1.14.1 - 50</option>
+          <option>1.14 - 17</option>
+          <option>1.13.2 - 657</option>
+          <option>1.13.1 - 386</option>
+          <option>1.13 - 173</option>
+          <option>1.12.2 - 1620</option>
+          <option>1.12.1 - 1204</option>
+          <option>1.12 - 1169</option>
+          <option>1.11.2 - 1106</option>
+          <option>1.10.2 - 918</option>
+          <option>1.9.4 - 775</option>
+          <option>1.8.8 - 445</option>
+        </select>
+
+        <select name="java" required>
+          <option value="">Select Java Version</option>
+          <option>Java 21</option>
+          <option>Java 17</option>
+          <option>Java 16</option>
+          <option>Java 11</option>
+          <option>Java 8</option>
+        </select>
+      </div>
+
+      <!-- Discord Bot Section -->
+      <div id="discord-fields">
+        <select name="bot-language">
+          <option value="">Select Bot Language</option>
+          <option>Node.js</option>
+          <option>Python</option>
+        </select>
+
+        <select name="ram-discord">
+          <option value="">Select RAM for Bot</option>
+          <option>512MB</option>
+        </select>
+      </div>
+
+      <input type="text" name="discord" placeholder="Your Discord Username" required />
+      <textarea name="notes" placeholder="Any notes..." rows="4"></textarea>
+      <button type="submit">Send Request</button>
     </form>
 
-    <!-- القائمة الثانية: طلب بوتات ديسكورد -->
-    <form id="formDiscordBot">
-      <h2>🤖 طلب بوتات Discord 🤖</h2>
-      <input type="text" name="botName" placeholder="اسم البوت Bot Name" required />
-      <select name="botType" required>
-        <option value="">نوع البوت</option>
-        <option>موسيقى Music</option>
-        <option>إدارة Administration</option>
-        <option>مرح Fun</option>
-        <option>حماية Security</option>
-        <option>تخصيص Custom</option>
-      </select>
-      <select name="botLanguage" required>
-        <option value="">لغة البرمجة للبوت</option>
-        <option>JavaScript (Node.js)</option>
-        <option>Python</option>
-      </select>
-      <input type="text" name="ownerDiscord" placeholder="اسم صاحب البوت في ديسكورد" required />
-      <textarea
-        name="botNotes"
-        placeholder="تفاصيل إضافية أو طلبات خاصة عن البوت"
-        rows="4"
-      ></textarea>
-      <button type="submit">إرسال طلب بوت</button>
-    </form>
-  </div>
-
-  <div class="support-link">
-    <a href="https://discord.gg/rZzt4j6SZ3" target="_blank">💬 الدعم الديسكورد</a>
+    <div class="support-link">
+      <a href="https://discord.gg/rZzt4j6SZ3" target="_blank">💬 الدعم الفني - ديسكورد</a>
+    </div>
   </div>
 
   <script>
+    const serviceType = document.getElementById("serviceType");
+    const mcFields = document.getElementById("minecraft-fields");
+    const discordFields = document.getElementById("discord-fields");
     const softwareSelect = document.getElementById("softwareSelect");
     const paperBuilds = document.getElementById("paper-builds");
 
-    // عرض أو إخفاء قائمة إصدارات Paper بناءً على اختيار البرنامج
+    serviceType.addEventListener("change", () => {
+      mcFields.style.display = serviceType.value === "minecraft" ? "block" : "none";
+      discordFields.style.display = serviceType.value === "discord" ? "block" : "none";
+    });
+
     softwareSelect.addEventListener("change", () => {
-      if (softwareSelect.value === "Paper") {
-        paperBuilds.style.display = "block";
-      } else {
+      paperBuilds.style.display = softwareSelect.value === "Paper" ? "block" : "none";
+    });
+
+    document.getElementById("serverRequestForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const data = new FormData(e.target);
+      const discordName = data.get("discord").trim();
+
+      const requestData = {
+        content: `📥 **New Hosting Request**\n
+🔧 Type: ${serviceType.value === "minecraft" ? "Minecraft Server" : "Discord Bot"}\n
+💬 Discord: ${discordName}\n📝 Notes: ${data.get("notes") || "N/A"}`
+      };
+
+      fetch("https://discord.com/api/webhooks/1389245956746379396/j2TK9UVsTLnDE4zgbjsTIaphzheiZjlks1nN0P2hWhhd6-MmSNTbsup2WbFrb8YX6FqT", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(requestData)
+      }).then(() => {
+        alert("✅ Sent successfully!");
+        e.target.reset();
+        mcFields.style.display = "none";
+        discordFields.style.display = "none";
         paperBuilds.style.display = "none";
-      }
-    });
-
-    // الـ Webhook نفسه للإرسال (غيره لو عندك ويب هوك مختلف للبوتات)
-    const webhookURL = "https://discord.com/api/webhooks/1389245956746379396/j2TK9UVsTLnDE4zgbjsTIaphzheiZjlks1nN0P2hWhhd6-MmSNTbsup2WbFrb8YX6FqT";
-
-    // إرسال طلب سيرفر ماينكرافت
-    document.getElementById("formMinecraft").addEventListener("submit", function (e) {
-      e.preventDefault();
-      const data = new FormData(this);
-
-      const content = `📥 **New Minecraft Server Request**\n
-اسم السيرفر: ${data.get("serverName")}
-RAM: ${data.get("ram")}
-CPU: ${data.get("cpu")}
-Disk: ${data.get("disk")}
-Version: ${data.get("version")}
-Software: ${data.get("software")}
-Paper Build: ${data.get("paperBuild") || "N/A"}
-Java: ${data.get("java")}
-Discord: ${data.get("discord")}
-Notes: ${data.get("notes") || "N/A"}`;
-
-      fetch(webhookURL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ content }),
-      })
-        .then(() => {
-          alert("✅ تم إرسال طلب سيرفر Minecraft بنجاح!");
-          this.reset();
-          paperBuilds.style.display = "none";
-        })
-        .catch((err) => {
-          alert("❌ فشل في إرسال الطلب، تحقق من رابط الويب هوك.");
-          console.error(err);
-        });
-    });
-
-    // إرسال طلب بوتات ديسكورد
-    document.getElementById("formDiscordBot").addEventListener("submit", function (e) {
-      e.preventDefault();
-      const data = new FormData(this);
-
-      const content = `📥 **New Discord Bot Request**\n
-اسم البوت: ${data.get("botName")}
-نوع البوت: ${data.get("botType")}
-لغة البرمجة: ${data.get("botLanguage")}
-صاحب البوت (Discord): ${data.get("ownerDiscord")}
-تفاصيل: ${data.get("botNotes") || "N/A"}`;
-
-      fetch(webhookURL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ content }),
-      })
-        .then(() => {
-          alert("✅ تم إرسال طلب بوت Discord بنجاح!");
-          this.reset();
-        })
-        .catch((err) => {
-          alert("❌ فشل في إرسال الطلب، تحقق من رابط الويب هوك.");
-          console.error(err);
-        });
+      }).catch(err => {
+        alert("❌ Failed to send.");
+        console.error(err);
+      });
     });
   </script>
 </body>
-  </html>
-  
+</html>
