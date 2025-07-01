@@ -118,45 +118,6 @@
           <option>1.21.3</option>
           <option>1.21.1</option>
           <option>1.21</option>
-          <option>1.20.6</option>
-          <option>1.20.5</option>
-          <option>1.20.4</option>
-          <option>1.20.2</option>
-          <option>1.20.1</option>
-          <option>1.19.4</option>
-          <option>1.19.3</option>
-          <option>1.19.2</option>
-          <option>1.19.1</option>
-          <option>1.19</option>
-          <option>1.18.2</option>
-          <option>1.18.1</option>
-          <option>1.18</option>
-          <option>1.17.1</option>
-          <option>1.17</option>
-          <option>1.16.5</option>
-          <option>1.16.4</option>
-          <option>1.16.3</option>
-          <option>1.16.2</option>
-          <option>1.16.1</option>
-          <option>1.15.2</option>
-          <option>1.15.1</option>
-          <option>1.15</option>
-          <option>1.14.4</option>
-          <option>1.14.3</option>
-          <option>1.14.2</option>
-          <option>1.14.1</option>
-          <option>1.14</option>
-          <option>1.13.2</option>
-          <option>1.13.1</option>
-          <option>1.13</option>
-          <option>1.12.2</option>
-          <option>1.12.1</option>
-          <option>1.12</option>
-          <option>1.11.2</option>
-          <option>1.10.2</option>
-          <option>1.9.4</option>
-          <option>1.8.9</option>
-          <option>1.8.8</option>
         </select>
 
         <select name="software" id="softwareSelect" required>
@@ -176,55 +137,12 @@
         <select name="paperBuild" id="paper-builds">
           <option>1.21.5 - 25</option>
           <option>1.21.4 - 226</option>
-          <option>1.21.3 - 83</option>
-          <option>1.21.1 - 133</option>
-          <option>1.21 - 130</option>
-          <option>1.20.6 - 151</option>
-          <option>1.20.5 - 22</option>
-          <option>1.20.4 - 499</option>
-          <option>1.20.2 - 318</option>
-          <option>1.20.1 - 196</option>
-          <option>1.20 - 17</option>
-          <option>1.19.4 - 550</option>
-          <option>1.19.3 - 448</option>
-          <option>1.19.2 - 307</option>
-          <option>1.19.1 - 111</option>
-          <option>1.19 - 81</option>
-          <option>1.18.2 - 388</option>
-          <option>1.18.1 - 216</option>
-          <option>1.18 - 66</option>
-          <option>1.17.1 - 411</option>
-          <option>1.17 - 79</option>
-          <option>1.16.5 - 794</option>
-          <option>1.16.4 - 416</option>
-          <option>1.16.3 - 253</option>
-          <option>1.16.2 - 189</option>
-          <option>1.16.1 - 138</option>
-          <option>1.15.2 - 393</option>
-          <option>1.15.1 - 62</option>
-          <option>1.15 - 21</option>
-          <option>1.14.4 - 245</option>
-          <option>1.14.3 - 134</option>
-          <option>1.14.2 - 107</option>
-          <option>1.14.1 - 50</option>
-          <option>1.14 - 17</option>
-          <option>1.13.2 - 657</option>
-          <option>1.13.1 - 386</option>
-          <option>1.13 - 173</option>
-          <option>1.12.2 - 1620</option>
-          <option>1.12.1 - 1204</option>
-          <option>1.12 - 1169</option>
-          <option>1.11.2 - 1106</option>
-          <option>1.10.2 - 918</option>
-          <option>1.9.4 - 775</option>
-          <option>1.8.8 - 445</option>
         </select>
 
         <select name="java" required>
           <option value="">Select Java Version</option>
           <option>Java 21</option>
           <option>Java 17</option>
-          <option>Java 16</option>
           <option>Java 11</option>
           <option>Java 8</option>
         </select>
@@ -244,8 +162,8 @@
         </select>
       </div>
 
-      <input type="text" name="discord" placeholder="Discord Username اسم حسابك في الديسكورد" required />
-      <textarea name="notes" placeholder="للمعلومه لازم يكون عندك حساب في الديسكورد عشان يديك الباسورد والايميل ودوس على كلمه دعم اللي تحت لو انت عايز تكلم الدعم" rows="4"></textarea>
+      <input type="text" name="discord" placeholder="Discord Username" required />
+      <textarea name="notes" placeholder="Any notes..." rows="4"></textarea>
       <button type="submit">Send Request</button>
     </form>
 
@@ -275,21 +193,25 @@
       const data = new FormData(e.target);
       const discordName = data.get("discord").trim();
 
-      const requestData = {
-        content:
-          serviceType.value === "minecraft"
-            ? `📥 **New Hosting Request**\n
+      let content = "";
+
+      if (serviceType.value === "minecraft") {
+        content = `📥 **New Hosting Request**\n
 🔧 Type: Minecraft Server\n
-📀 RAM: ${data.get("ram") || "N/A"}\n🧠 CPU: ${data.get("cpu") || "N/A"}\n📍 Disk: ${data.get("disk") || "N/A"}\n🧱 Version: ${data.get("version") || "N/A"}\n⚙️ Software: ${data.get("software") || "N/A"}\n📦 Paper Build: ${data.get("paperBuild") || "N/A"}\n☕ Java: ${data.get("java") || "N/A"}\n💬 Discord: ${discordName}\n📝 Notes: ${data.get("notes") || "N/A"}`
-            : `📥 **New Hosting Request**\n
+💾 RAM: ${data.get("ram")}\n🧠 CPU: ${data.get("cpu")}\n💽 Disk: ${data.get("disk")}\n🧱 Version: ${data.get("version")}\n⚙️ Software: ${data.get("software")}\n📦 Paper Build: ${data.get("paperBuild") || "N/A"}\n☕ Java: ${data.get("java")}\n💬 Discord: ${discordName}\n📝 Notes: ${data.get("notes") || "N/A"}`;
+      } else if (serviceType.value === "discord") {
+        content = `📥 **New Hosting Request**\n
 🔧 Type: Discord Bot\n
-🧠 Bot Language: ${data.get("bot-language") || "N/A"}\n📀 Specs: ${data.get("ram-discord") || "N/A"}\n💬 Discord: ${discordName}\n📝 Notes: ${data.get("notes") || "N/A"}`
-      };
+🧠 Bot Language: ${data.get("bot-language")}\n
+💾 Specs: ${data.get("ram-discord")}\n
+💬 Discord: ${discordName}\n
+📝 Notes: ${data.get("notes") || "N/A"}`;
+      }
 
       fetch("https://discord.com/api/webhooks/1389455045216440474/B8TyS5qyEMk1O1ejfEJogQawYsj42ISgEUSmd0NCkPr3STrebgeSUNIa992Zn20GSL5v", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(requestData)
+        body: JSON.stringify({ content })
       }).then(() => {
         alert("✅ Sent successfully!");
         e.target.reset();
@@ -303,4 +225,5 @@
     });
   </script>
 </body>
-</html>
+                                                     </html>
+  
