@@ -6,6 +6,7 @@
   <title>Fox Hosting</title>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
   <style>
+    /* Coder By FeiaDev */
     body {
       margin: 0;
       font-family: 'Orbitron', sans-serif;
@@ -133,20 +134,28 @@
       height: 22px;
       fill: currentColor;
     }
-    .logged-in-message {
+    .message-display {
         text-align: center;
-        color: #00ff00;
+        margin-top: 15px;
+        padding: 10px;
+        border-radius: 8px;
         font-weight: bold;
-        margin-bottom: 20px;
-        display: none;
-        font-size: 1.1em;
+        display: none; 
+    }
+    .message-display.success {
+        background-color: #28a745;
+        color: white;
+    }
+    .message-display.error {
+        background-color: #dc3545;
+        color: white;
     }
   </style>
 </head>
 <body>
   <div class="form-container">
     <img src="https://cdn.discordapp.com/attachments/1301118580955418676/1389554841554124810/ChatGPT_Image_Jun_4_2025_12_38_12_PM.png?ex=68650b4a&is=6863b9ca&hm=442a02cb60b93555a50c81cc39fbfd8b7fb4baac7597f128f0239c651ad1ac50&" alt="Fox Logo" style="display: block; margin: 0 auto 15px; max-width: 120px;" />
-    <h2>🔥 Fox hosting 🔥</h2>
+    <h2>🔥 فوكس هوستنج 🔥</h2>
 
     <div class="social-login-buttons">
       <button class="google">
@@ -167,7 +176,7 @@
       </select>
 
       <div id="minecraft-fields">
-        <select name="ram">
+        <select name="ram" required>
           <option value="">اختار الرامات</option>
           <option>2 جيجا</option>
           <option>3 جيجا</option>
@@ -182,7 +191,7 @@
           <option>20 جيجا (مميز)</option>
         </select>
 
-        <select name="cpu">
+        <select name="cpu" required>
           <option value="">اختار المعالج (CPU)</option>
           <option>1 كور</option>
           <option>2 كور</option>
@@ -194,7 +203,7 @@
           <option>8 كور (مميز)</option>
         </select>
 
-        <select name="disk">
+        <select name="disk" required>
           <option value="">اختار مساحة التخزين</option>
           <option>5 جيجا</option>
           <option>10 جيجا</option>
@@ -208,7 +217,7 @@
           <option>50 جيجا (مميز)</option>
         </select>
 
-        <select name="version">
+        <select name="version" required>
           <option value="">اختار إصدار ماينكرافت</option>
           <option>1.7.10</option>
           <option>1.8</option>
@@ -283,18 +292,17 @@
           <option>Purpur</option>
           <option>Spigot</option>
           <option>Nukkit</option>
-          <option>Bungeecrd</option>
+          <option>Bungeecord</option>
           <option>Forge</option>
           <option>Fabric</option>
           <option>NeoForge</option>
           <option>Velocity</option>
-          <option>FTB Modpacks</option>
-          <option>PocketMine MP</option>
-          <option>Minecraft Vanilla</option>
+          <option>Vanilla Minecraft</option>
           <option>Minecraft Bedrock</option>
         </select>
 
         <select name="paperBuild" id="paper-builds">
+          <option value="">اختار إصدار Paper (لو متاح)</option>
           <option>1.21.5 - 25</option>
           <option>1.21.4 - 226</option>
           <option>1.21.3 - 83</option>
@@ -352,34 +360,15 @@
       </div>
 
       <div id="discord-fields">
-        <select name="bot-language">
+        <select name="bot-language" required>
           <option value="">اختار لغة البوت</option>
           <option>Node.js</option>
           <option>Python</option>
         </select>
 
-        <select name="CPU-discord">
-          <option value="">اختار/المعالج/CPU</option>
-          <option>25% CPU</option>
-          <option>50% CPU</option>
-          <option>60% CPU</option>
-          <option>80% CPU</option>
-        </select>
-        
-        <select name="RAM-discord">
-          <option value="">اختار/الرامات/RAM</option>
-          <option>32 MB</option>
-          <option>64 MB</option>
-          <option>128 MB</option>
-          <option>256 MB</option>
-        </select>
-
-        <select name="Disk-discord">
-          <option value="">اختار/مساحه التخزين/Disk</option>
-          <option>128 MB</option>
-          <option>256 MB</option>
-          <option>512 MB</option>
-          <option>1024 MB</option>
+        <select name="ram-discord" required>
+          <option value="">اختار رامات/بروسيسور/مساحة للبوت</option>
+          <option>رامات 512 ميجا، بروسيسور 50%، مساحة 1 جيجا</option>
         </select>
       </div>
 
@@ -387,74 +376,163 @@
       <textarea name="notes" placeholder="ملحوظة: لازم يكون عندك حساب على الديسكورد عشان نبعتلك الباسورد والإيميل. لو عايز تكلم الدعم الفني، دوس على رابط الدعم اللي تحت." rows="4"></textarea>
       <button type="submit">ابعت طلبك</button>
     </form>
+    
+    <div id="messageDisplay" class="message-display"></div>
 
     <div class="support-link">
       <a href="https://discord.gg/rZzt4j6SZ3" target="_blank">💬 الدعم الفني - ديسكورد</a>
     </div>
-  </div>
+    </div>
 
   <script>
+    /* Coder By FeiaDev */
     const serviceType = document.getElementById("serviceType");
     const mcFields = document.getElementById("minecraft-fields");
     const discordFields = document.getElementById("discord-fields");
     const softwareSelect = document.getElementById("softwareSelect");
     const paperBuilds = document.getElementById("paper-builds");
+    const messageDisplay = document.getElementById("messageDisplay");
 
     serviceType.addEventListener("change", () => {
       mcFields.style.display = serviceType.value === "minecraft" ? "block" : "none";
       discordFields.style.display = serviceType.value === "discord" ? "block" : "none";
+      setRequiredAttributes(mcFields, serviceType.value === "minecraft");
+      setRequiredAttributes(discordFields, serviceType.value === "discord");
+      
+      if (serviceType.value !== "minecraft" || softwareSelect.value !== "Paper") {
+          paperBuilds.style.display = "none";
+      }
     });
 
     softwareSelect.addEventListener("change", () => {
       paperBuilds.style.display = softwareSelect.value === "Paper" ? "block" : "none";
+      const paperBuildsSelect = paperBuilds.querySelector('select');
+      if (paperBuildsSelect) {
+          paperBuildsSelect.required = softwareSelect.value === "Paper";
+      }
     });
+
+    function setRequiredAttributes(container, isRequired) {
+        const selects = container.querySelectorAll('select');
+        selects.forEach(select => {
+            select.required = isRequired;
+        });
+    }
+
+    setRequiredAttributes(mcFields, false);
+    setRequiredAttributes(discordFields, false);
+
 
     document.getElementById("serverRequestForm").addEventListener("submit", function (e) {
       e.preventDefault();
+
+      messageDisplay.style.display = "none";
+      messageDisplay.textContent = "";
+      messageDisplay.classList.remove('success', 'error');
+
       const data = new FormData(e.target);
       const serviceChoice = serviceType.value;
       const discordName = data.get("discord").trim();
+
+      if (!serviceChoice) {
+        showMessage("من فضلك، اختار نوع الخدمة أولاً.", "error");
+        return;
+      }
+      if (!discordName) {
+        showMessage("من فضلك، أدخل اسم حسابك على الديسكورد.", "error");
+        return;
+      }
+
+      if (serviceChoice === "minecraft") {
+        const requiredMinecraftFields = ["ram", "cpu", "disk", "version", "software", "java"];
+        for (const field of requiredMinecraftFields) {
+          if (!data.get(field)) {
+            showMessage(`من فضلك، اختار ${getFieldNameArabic(field)} لسيرفر الماينكرافت.`, "error");
+            return;
+          }
+        }
+        if (data.get("software") === "Paper" && !data.get("paperBuild")) {
+            showMessage("من فضلك، اختار إصدار Paper.", "error");
+            return;
+        }
+      } else if (serviceChoice === "discord") {
+        const requiredDiscordFields = ["bot-language", "ram-discord"];
+        for (const field of requiredDiscordFields) {
+          if (!data.get(field)) {
+            showMessage(`من فضلك، اختار ${getFieldNameArabic(field)} لبوت الديسكورد.`, "error");
+            return;
+          }
+        }
+      }
 
       let messageContent = `📥 **طلب استضافة جديد وصل يا جدعان!**\n\n`;
 
       if (serviceChoice === "minecraft") {
         messageContent += `🔧 **النوع**: سيرفر ماينكرافت\n`;
-        messageContent += `💾 **الرامات**: ${data.get("ram") || 'مش متحدة'}\n`;
-        messageContent += `🧠 **البروسيسور**: ${data.get("cpu") || 'مش متحد'}\n`;
-        messageContent += `💽 **مساحة التخزين**: ${data.get("disk") || 'مش متحدة'}\n`;
-        messageContent += `🧱 **إصدار الماينكرافت**: ${data.get("version") || 'مش متحد'}\n`;
-        messageContent += `⚙️ **برنامج السيرفر**: ${data.get("software") || 'مش متحد'}\n`;
+        messageContent += `💾 **الرامات**: ${data.get("ram")}\n`;
+        messageContent += `🧠 **البروسيسور**: ${data.get("cpu")}\n`;
+        messageContent += `💽 **مساحة التخزين**: ${data.get("disk")}\n`;
+        messageContent += `🧱 **إصدار الماينكرافت**: ${data.get("version")}\n`;
+        messageContent += `⚙️ **برنامج السيرفر**: ${data.get("software")}\n`;
         if (data.get("software") === "Paper") {
-            messageContent += `📦 **إصدار Paper**: ${data.get("paperBuild") || "N/A"}\n`;
+            messageContent += `📦 **إصدار Paper**: ${data.get("paperBuild")}\n`;
         }
-        messageContent += `☕ **إصدار الجافا**: ${data.get("java") || 'مش متحد'}\n`;
+        messageContent += `☕ **إصدار الجافا**: ${data.get("java")}\n`;
       } else if (serviceChoice === "discord") {
         messageContent += `🔧 **النوع**: بوت ديسكورد\n`;
-        messageContent += `🤖 **لغة البوت**: ${data.get("bot-language") || 'مش متحدة'}\n`;
-        messageContent += `📊 **مواصفات البوت**: ${data.get("ram-discord") || 'مش متحدة'}\n`;
-      } else {
-        messageContent += `🔧 **النوع**: لم يتم الاختيار\n`;
+        messageContent += `🤖 **لغة البوت**: ${data.get("bot-language")}\n`;
+        messageContent += `📊 **مواصفات البوت**: ${data.get("ram-discord")}\n`;
       }
       
       messageContent += `\n💬 **حساب الديسكورد**: ${discordName}\n`;
       messageContent += `📝 **ملاحظات**: ${data.get("notes") || "مفيش ملاحظات زيادة"}`;
 
+      showMessage("جاري إرسال طلبك...", "info");
 
       fetch("https://discord.com/api/webhooks/1389455045216440474/B8TyS5qyEMk1O1ejfEJogQawYsj42ISgEUSmd0NCkPr3STrebgeSUNIa992Zn20GSL5v", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ content: messageContent })
-      }).then(() => {
-        alert("✅ سيتم الرد عليك قريبا والمراجعه على الطلب الذي انت طلبته");
-        e.target.reset();
-        mcFields.style.display = "none";
-        discordFields.style.display = "none";
-        paperBuilds.style.display = "none";
+      }).then(response => {
+          if (response.ok) {
+            showMessage("✅ طلبك اتبعت بنجاح يا ريس!", "success");
+            e.target.reset();
+            mcFields.style.display = "none";
+            discordFields.style.display = "none";
+            paperBuilds.style.display = "none";
+          } else {
+            showMessage("❌ معلش، في حاجة غلط حصلت. جرب تاني يا معلم!", "error");
+            console.error("Discord Webhook Error:", response.status, response.statusText);
+          }
       }).catch(err => {
-        alert("❌ معلش، في حاجة غلط حصلت. جرب تاني يا معلم!");
+        showMessage("❌ معلش، في حاجة غلط حصلت. جرب تاني يا معلم!", "error");
         console.error(err);
       });
     });
+
+    function showMessage(message, type) {
+        messageDisplay.textContent = message;
+        messageDisplay.className = 'message-display ' + type;
+        messageDisplay.style.display = "block";
+
+        setTimeout(() => {
+            messageDisplay.style.display = "none";
+        }, 5000);
+    }
+
+    function getFieldNameArabic(field) {
+        switch (field) {
+            case "ram": return "الرامات";
+            case "cpu": return "المعالج (CPU)";
+            case "disk": return "مساحة التخزين";
+            case "version": return "إصدار ماينكرافت";
+            case "software": return "نوع برنامج السيرفر";
+            case "java": return "إصدار الجافا";
+            case "bot-language": return "لغة البوت";
+            case "ram-discord": return "رامات/بروسيسور/مساحة للبوت";
+            default: return field;
+        }
+    }
   </script>
 </body>
 </html>
