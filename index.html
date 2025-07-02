@@ -3,67 +3,172 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Fox Hosting</title>
+  <title>Fox Hosting - Login</title>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
   <style>
     /* Coder By FeiaDev */
+    :root {
+        --primary-red: #ff3333;
+        --dark-red: #cc0000;
+        --glow-red: rgba(255, 0, 0, 0.8);
+        --dark-background: #0a0a0a;
+        --form-background: rgba(0, 0, 0, 0.9);
+        --text-color: #e0e0e0;
+        --border-color: rgba(255, 51, 51, 0.5);
+    }
+
     body {
       margin: 0;
       font-family: 'Orbitron', sans-serif;
-      background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
-      color: #e0e0e0;
+      background: var(--dark-background);
+      color: var(--text-color);
       display: flex;
       justify-content: center;
       align-items: center;
       min-height: 100vh;
       padding: 20px;
-      box-sizing: border-box;
+      box-sizing: border;
+      overflow: hidden; /* Prevent scrollbar from particles */
     }
-    .form-container {
-      background: rgba(0, 0, 0, 0.9);
+
+    /* Animated Background */
+    .animated-background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background: linear-gradient(135deg, #0f0c29, #302b63, #24243e); /* Original gradient as fallback */
+      overflow: hidden;
+    }
+
+    .animated-background::before {
+      content: '';
+      position: absolute;
+      width: 300%;
+      height: 300%;
+      top: -100%;
+      left: -100%;
+      background: radial-gradient(circle at 50% 50%, rgba(255, 0, 0, 0.1) 0%, transparent 70%);
+      animation: moveBackground 30s linear infinite;
+      opacity: 0.3;
+    }
+
+    @keyframes moveBackground {
+      0% {
+        transform: translate(0, 0);
+      }
+      25% {
+        transform: translate(50%, 50%);
+      }
+      50% {
+        transform: translate(0, 100%);
+      }
+      75% {
+        transform: translate(100%, 0);
+      }
+      100% {
+        transform: translate(0, 0);
+      }
+    }
+
+    /* Particles */
+    .particles-js-canvas-el {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+    }
+
+    .form-container, .login-container {
+      background: var(--form-background);
       padding: 40px;
       border-radius: 20px;
-      box-shadow: 0 0 40px rgba(255, 0, 0, 0.6), 0 0 15px rgba(255, 0, 0, 0.4);
+      box-shadow: 0 0 40px var(--glow-red), 0 0 15px rgba(255, 0, 0, 0.4);
       width: 100%;
       max-width: 550px;
       overflow-y: auto;
       max-height: 95vh;
-      border: 1px solid rgba(255, 0, 0, 0.5);
+      border: 1px solid var(--border-color);
+      position: relative;
+      z-index: 10;
+      animation: fadeInScale 0.8s ease-out forwards;
     }
+
+    .form-container.hidden {
+        display: none;
+    }
+
+    .login-container {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    @keyframes fadeInScale {
+        from {
+            opacity: 0;
+            transform: scale(0.95);
+        }
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+
     h2 {
       text-align: center;
-      color: #ff3333;
+      color: var(--primary-red);
       margin-bottom: 25px;
-      font-size: 2.2em;
-      text-shadow: 0 0 10px rgba(255, 0, 0, 0.8);
+      font-size: 2.5em;
+      text-shadow: 0 0 15px var(--glow-red);
+      letter-spacing: 1.5px;
     }
-    input, select, textarea, button {
+
+    h3 {
+        color: var(--text-color);
+        margin-bottom: 30px;
+        font-size: 1.5em;
+    }
+
+    input, select, textarea {
       width: 100%;
       padding: 14px;
       margin-bottom: 18px;
       background: #1c1c1c;
-      border: 1px solid #ff3333;
-      color: #e0e0e0;
+      border: 1px solid var(--primary-red);
+      color: var(--text-color);
       border-radius: 10px;
       font-size: 1.05em;
       transition: all 0.3s ease;
     }
     input:focus, select:focus, textarea:focus {
-      border-color: #ff6666;
-      box-shadow: 0 0 8px rgba(255, 51, 51, 0.8);
+      border-color: var(--primary-red);
+      box-shadow: 0 0 10px var(--glow-red);
       outline: none;
     }
-    button[type="submit"] {
-      background: #ff3333;
+    button {
+      width: 100%;
+      padding: 14px;
+      margin-bottom: 18px;
+      background: var(--primary-red);
       border: none;
+      color: white;
       font-weight: bold;
       cursor: pointer;
       font-size: 1.2em;
       letter-spacing: 0.5px;
+      border-radius: 10px;
       box-shadow: 0 5px 15px rgba(255, 0, 0, 0.4);
+      transition: all 0.3s ease;
     }
-    button[type="submit"]:hover {
-      background: #cc0000;
+    button:hover {
+      background: var(--dark-red);
       box-shadow: 0 8px 20px rgba(255, 0, 0, 0.6);
       transform: translateY(-2px);
     }
@@ -72,16 +177,16 @@
       margin-top: 25px;
     }
     .support-link a {
-      color: #ff6666;
+      color: var(--primary-red);
       text-decoration: none;
       font-weight: bold;
       font-size: 1.1em;
       transition: color 0.3s ease, text-shadow 0.3s ease;
     }
     .support-link a:hover {
-      color: #ff0000;
+      color: var(--dark-red);
       text-decoration: underline;
-      text-shadow: 0 0 8px rgba(255, 0, 0, 0.8);
+      text-shadow: 0 0 8px var(--glow-red);
     }
     #minecraft-fields, #discord-fields {
       display: none;
@@ -92,81 +197,92 @@
     .social-login-buttons {
       display: flex;
       flex-direction: column;
-      gap: 12px;
-      margin-bottom: 25px;
+      gap: 15px;
+      margin-top: 30px; /* Adjusted margin */
+      margin-bottom: 30px; /* Adjusted margin */
     }
     .social-login-buttons button {
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 14px;
-      border-radius: 10px;
+      padding: 15px; /* Slightly larger padding */
+      border-radius: 12px; /* Slightly more rounded */
       font-weight: bold;
-      font-size: 1.1em;
+      font-size: 1.2em; /* Slightly larger font */
       transition: all 0.3s ease;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+      border: 2px solid transparent; /* Added for hover effect */
     }
     .social-login-buttons button:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
-    }
-    .social-login-buttons button.google {
-      background-color: #DB4437;
-      border: 1px solid #DB4437;
-      color: white;
-    }
-    .social-login-buttons button.google:hover {
-      background-color: #C23321;
-      border-color: #C23321;
+      transform: translateY(-3px); /* More pronounced lift */
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6); /* Stronger shadow */
+      border-color: var(--primary-red); /* Red border on hover */
     }
     .social-login-buttons button.discord {
       background-color: #7289DA;
-      border: 1px solid #7289DA;
       color: white;
     }
     .social-login-buttons button.discord:hover {
       background-color: #677BC4;
-      border-color: #677BC4;
     }
     .social-login-buttons button svg {
-      margin-right: 12px;
-      width: 22px;
-      height: 22px;
+      margin-right: 15px; /* Slightly more margin */
+      width: 25px; /* Slightly larger icon */
+      height: 25px; /* Slightly larger icon */
       fill: currentColor;
     }
     .message-display {
         text-align: center;
-        margin-top: 15px;
-        padding: 10px;
-        border-radius: 8px;
+        margin-top: 20px; /* Adjusted margin */
+        padding: 12px; /* Slightly larger padding */
+        border-radius: 10px; /* More rounded */
         font-weight: bold;
         display: none; 
+        font-size: 1em;
     }
     .message-display.success {
         background-color: #28a745;
         color: white;
+        box-shadow: 0 0 15px rgba(40, 167, 69, 0.6);
     }
     .message-display.error {
         background-color: #dc3545;
         color: white;
+        box-shadow: 0 0 15px rgba(220, 53, 69, 0.6);
+    }
+    .message-display.info {
+        background-color: #007bff;
+        color: white;
+        box-shadow: 0 0 15px rgba(0, 123, 255, 0.6);
+    }
+
+    .logo {
+        display: block; 
+        margin: 0 auto 20px; /* Increased margin-bottom */
+        max-width: 150px; /* Slightly larger logo */
     }
   </style>
 </head>
 <body>
-  <div class="form-container">
-    <img src="https://cdn.discordapp.com/attachments/1301118580955418676/1389990770710417482/e27c3d993659c799.jpg?ex=6866a148&is=68654fc8&hm=4ec9dd533e48ba9807e95709beaea77ad7eabed54e1206ab74f2c0431e45b86c&" alt="Fox Logo" style="display: block; margin: 0 auto 15px; max-width: 120px;" />
-    <h2>🔥 Fox hosting 🔥</h2>
+  <div class="animated-background"></div>
+  <div id="particles-js"></div>
 
+  <div class="login-container" id="loginScreen">
+    <img src="https://cdn.discordapp.com/attachments/1301118580955418676/1389554841554124810/ChatGPT_Image_Jun_4_2025_12_38_12_PM.png?ex=68650b4a&is=6863b9ca&hm=442a02cb60b93555a50c81cc39fbfd8b7fb4baac7597f128f0239c651ad1ac50&" alt="Fox Logo" class="logo" />
+    <h2>مرحباً بك في فوكس هوستنج!</h2>
+    <h3>الرجاء تسجيل الدخول للمتابعة</h3>
     <div class="social-login-buttons">
-      <button class="google">
-        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M44.5 20H24V28H35.5C34.7 32.5 30.5 35.5 24 35.5C17.5 35.5 12 30.5 12 24C12 17.5 17.5 12 24 12C27.8 12 31.2 13.6 33.6 16.3L38.9 11C35 7.2 29.8 5 24 5C13.5 5 5 13.5 5 24C5 34.5 13.5 43 24 43C34.5 43 43 34.5 43 24C43 22.5 42.8 21.2 42.5 20H44.5Z" fill="white"/></svg>
-        سجل دخولك بجوجل
-      </button>
-      <button class="discord">
+      <button class="discord" id="discordLoginButton">
         <svg fill="white" viewBox="0 0 245 240" xmlns="http://www.w3.org/2000/svg"><path d="M104.4 103.9C104.4 103.9 101.4 95.4 97.3 92.4C93.2 89.4 86.8 88.8 80 90.6C73.2 92.4 67.8 97 64.2 103.9C60.6 110.8 60.6 117.8 60.6 124.7C60.6 131.6 63.6 138.6 69.1 143.6C74.6 148.6 81.5 150.9 88.9 150.9C96.3 150.9 103.2 148.6 108.7 143.6C114.2 138.6 117.2 131.6 117.2 124.7C117.2 117.8 117.2 110.8 113.6 103.9C110 97 104.4 103.9 104.4 103.9Z M140.6 103.9C140.6 103.9 137.6 95.4 133.5 92.4C129.4 89.4 123 88.8 116.2 90.6C109.4 92.4 104 97 100.4 103.9C96.8 110.8 96.8 117.8 96.8 124.7C96.8 131.6 99.8 138.6 105.3 143.6C110.8 148.6 117.7 150.9 125.1 150.9C132.5 150.9 139.4 148.6 144.9 143.6C150.4 138.6 153.4 131.6 153.4 124.7C153.4 117.8 153.4 110.8 149.8 103.9C146.2 97 140.6 103.9 140.6 103.9Z M173.2 19.3C173.2 19.3 155.6 12.2 135.5 10.6C115.4 9 94.5 10.6 74.4 19.3C54.3 27.9 39.4 46.5 39.4 46.5L34.1 63.8C34.1 63.8 30.6 73.1 27.9 83.2C25.2 93.3 22.5 103.4 22.5 113.5C22.5 123.6 24.3 133.7 27 143.8C29.7 153.9 33.2 164 33.2 164L38.5 181.3C38.5 181.3 53.4 199.9 73.5 208.5C93.6 217.1 114.5 218.7 134.6 217.1C154.7 215.5 172.3 208.5 172.3 208.5L177.6 191.2C177.6 191.2 181.1 181.9 183.8 171.8C186.5 161.7 189.2 151.6 189.2 141.5C189.2 131.4 187.4 121.3 184.7 111.2C182 101.1 178.5 91 178.5 91L173.2 73.7C173.2 73.7 176.7 64.4 179.4 54.3C182.1 44.2 184.8 34.1 184.8 24C184.8 19.3 182.1 14.7 173.2 19.3Z"/></svg>
         سجل دخولك بالديسكورد
       </button>
     </div>
+    <div id="loginMessageDisplay" class="message-display"></div>
+  </div>
+
+  <div class="form-container hidden" id="mainContent">
+    <img src="https://cdn.discordapp.com/attachments/1301118580955418676/1389554841554124810/ChatGPT_Image_Jun_4_2025_12_38_12_PM.png?ex=68650b4a&is=6863b9ca&hm=442a02cb60b93555a50c81cc39fbfd8b7fb4baac7597f128f0239c651ad1ac50&" alt="Fox Logo" class="logo" />
+    <h2>🔥 فوكس هوستنج 🔥</h2>
 
     <form id="serverRequestForm">
       <select id="serviceType" required>
@@ -183,12 +299,12 @@
           <option>4 جيجا</option>
           <option>5 جيجا (مميز)</option>
           <option>6 جيجا (مميز)</option>
+          <option>7 جيجا (مميز)</option>
           <option>8 جيجا (مميز)</option>
+          <option>9 جيجا (مميز)</option>
           <option>10 جيجا (مميز)</option>
-          <option>12 جيجا (مميز)</option>
-          <option>16 جيجا (مميز)</option>
-          <option>32 جيجا (مميز)</option>
-          <option>64 جيجا (مميز)</option>
+          <option>15 جيجا (مميز)</option>
+          <option>20 جيجا (مميز)</option>
         </select>
 
         <select name="cpu" required>
@@ -367,17 +483,12 @@
         </select>
 
         <select name="ram-discord" required>
-          <option value="">اختار/الرامات/المعالج/مساحه التخزين</option>
-          <option>RAM: 256 MB CPU: 20% Storage: 1024MB 2M:credit:Billed: monthly</option>
-          <option>RAM: 512 MB CPU: 25% Storage: 2048MB 4M:credit:Billed: monthly</option>
-          <option>RAM: 1024 MB CPU: 50% Storage: 3072MB 6M:credit:Billed: monthly</option>
-          <option>RAM: 2048 MB CPU: 100% Storage: 4096MB 8M:credit:Billed: monthly</option>
-          <option>RAM: 4096 MB CPU: 150% Storage: 6124MB 10M:credit:Billed: monthly</option>
-          <option>RAM: 6144 MB CPU: 200% Storage: 6124MB 12M:credit:Billed: monthly</option>
+          <option value="">اختار رامات/بروسيسور/مساحة للبوت</option>
+          <option>رامات 512 ميجا، بروسيسور 50%، مساحة 1 جيجا</option>
         </select>
       </div>
 
-      <input type="text" name="discord" placeholder="اسم حسابك على الديسكورد (مطلوب)" required />
+      <input type="text" name="discord" id="discordUsernameInput" placeholder="اسم حسابك على الديسكورد (مطلوب)" required readonly />
       <textarea name="notes" placeholder="ملحوظة: لازم يكون عندك حساب على الديسكورد عشان نبعتلك الباسورد والإيميل. لو عايز تكلم الدعم الفني، دوس على رابط الدعم اللي تحت." rows="4"></textarea>
       <button type="submit">ابعت طلبك</button>
     </form>
@@ -387,8 +498,9 @@
     <div class="support-link">
       <a href="https://discord.gg/rZzt4j6SZ3" target="_blank">💬 الدعم الفني - ديسكورد</a>
     </div>
-    </div>
+  </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
   <script>
     /* Coder By FeiaDev */
     const serviceType = document.getElementById("serviceType");
@@ -397,7 +509,185 @@
     const softwareSelect = document.getElementById("softwareSelect");
     const paperBuilds = document.getElementById("paper-builds");
     const messageDisplay = document.getElementById("messageDisplay");
+    const loginScreen = document.getElementById("loginScreen");
+    const mainContent = document.getElementById("mainContent");
+    const discordLoginButton = document.getElementById("discordLoginButton");
+    const loginMessageDisplay = document.getElementById("loginMessageDisplay");
+    const discordUsernameInput = document.getElementById("discordUsernameInput");
 
+    // Initialize Particles.js
+    particlesJS('particles-js', {
+      "particles": {
+        "number": {
+          "value": 80,
+          "density": {
+            "enable": true,
+            "value_area": 800
+          }
+        },
+        "color": {
+          "value": "#ff3333" /* Particles color */
+        },
+        "shape": {
+          "type": "circle",
+          "stroke": {
+            "width": 0,
+            "color": "#000000"
+          },
+          "polygon": {
+            "nb_sides": 5
+          },
+        },
+        "opacity": {
+          "value": 0.5,
+          "random": false,
+          "anim": {
+            "enable": false,
+            "speed": 1,
+            "opacity_min": 0.1,
+            "sync": false
+          }
+        },
+        "size": {
+          "value": 3,
+          "random": true,
+          "anim": {
+            "enable": false,
+            "speed": 40,
+            "size_min": 0.1,
+            "sync": false
+          }
+        },
+        "line_linked": {
+          "enable": true,
+          "distance": 150,
+          "color": "#ff3333", /* Line color */
+          "opacity": 0.4,
+          "width": 1
+        },
+        "move": {
+          "enable": true,
+          "speed": 3,
+          "direction": "none",
+          "random": false,
+          "straight": false,
+          "out_mode": "out",
+          "bounce": false,
+          "attract": {
+            "enable": false,
+            "rotateX": 600,
+            "rotateY": 1200
+          }
+        }
+      },
+      "interactivity": {
+        "detect_on": "canvas",
+        "events": {
+          "onhover": {
+            "enable": true,
+            "mode": "grab"
+          },
+          "onclick": {
+            "enable": true,
+            "mode": "push"
+          },
+          "resize": true
+        },
+        "modes": {
+          "grab": {
+            "distance": 140,
+            "line_linked": {
+              "opacity": 1
+            }
+          },
+          "bubble": {
+            "distance": 400,
+            "size": 40,
+            "duration": 2,
+            "opacity": 8,
+            "speed": 3
+          },
+          "repulse": {
+            "distance": 200,
+            "duration": 0.4
+          },
+          "push": {
+            "particles_nb": 4
+          },
+          "remove": {
+            "particles_nb": 2
+          }
+        }
+      },
+      "retina_detect": true
+    });
+
+    // --- Login Logic ---
+    const DISCORD_CLIENT_ID = '1390006648231166022';
+    const DISCORD_REDIRECT_URI = 'http://fox-hosting.vercel.app/auth/discord/callback';
+    const DISCORD_SCOPES = ['identify']; // Request user's Discord ID and username
+
+    discordLoginButton.addEventListener("click", () => {
+        const authUrl = `https://discord.com/oauth2/authorize?client_id=${DISCORD_CLIENT_ID}&redirect_uri=${encodeURIComponent(DISCORD_REDIRECT_URI)}&response_type=token&scope=${DISCORD_SCOPES.join('%20')}`;
+        window.location.href = authUrl;
+    });
+
+    // Handle Discord Callback
+    window.addEventListener('load', () => {
+        const urlParams = new URLSearchParams(window.location.hash.substring(1));
+        const accessToken = urlParams.get('access_token');
+        const error = urlParams.get('error');
+
+        if (accessToken) {
+            fetchDiscordUser(accessToken);
+        } else if (error) {
+            showMessage(loginMessageDisplay, "فشل تسجيل الدخول بالديسكورد. حاول مرة أخرى.", "error");
+            console.error("Discord Auth Error:", error);
+        } else {
+            // No access token and no error, show login screen initially
+            loginScreen.classList.remove("hidden");
+            mainContent.classList.add("hidden");
+            document.title = "Fox Hosting - Login"; // Set login screen title
+        }
+    });
+
+    async function fetchDiscordUser(accessToken) {
+        try {
+            const response = await fetch('https://discord.com/api/v10/users/@me', {
+                headers: {
+                    authorization: `Bearer ${accessToken}`,
+                },
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            const user = await response.json();
+            // Store user info (e.g., in localStorage or a session)
+            localStorage.setItem('discordUser', JSON.stringify(user));
+            
+            // Populate Discord username field
+            discordUsernameInput.value = `${user.username}#${user.discriminator || '0000'}`;
+            discordUsernameInput.dataset.userId = user.id; // Store user ID
+            
+            // Show main content and hide login screen
+            loginScreen.classList.add("hidden");
+            mainContent.classList.remove("hidden");
+            document.title = "Fox Hosting - طلب خدمة"; // Set main content title
+            showMessage(messageDisplay, `أهلاً بك، ${user.username}! تم تسجيل دخولك بنجاح.`, "success");
+
+        } catch (error) {
+            showMessage(loginMessageDisplay, "حدث خطأ أثناء جلب بيانات الديسكورد. حاول مرة أخرى.", "error");
+            console.error("Error fetching Discord user:", error);
+            // In case of error, show login screen again
+            loginScreen.classList.remove("hidden");
+            mainContent.classList.add("hidden");
+            document.title = "Fox Hosting - Login";
+        }
+    }
+
+    // --- Form Logic (existing) ---
     serviceType.addEventListener("change", () => {
       mcFields.style.display = serviceType.value === "minecraft" ? "block" : "none";
       discordFields.style.display = serviceType.value === "discord" ? "block" : "none";
@@ -427,50 +717,51 @@
     setRequiredAttributes(mcFields, false);
     setRequiredAttributes(discordFields, false);
 
-
     document.getElementById("serverRequestForm").addEventListener("submit", function (e) {
       e.preventDefault();
 
       messageDisplay.style.display = "none";
       messageDisplay.textContent = "";
-      messageDisplay.classList.remove('success', 'error');
+      messageDisplay.classList.remove('success', 'error', 'info');
 
       const data = new FormData(e.target);
       const serviceChoice = serviceType.value;
-      const discordName = data.get("discord").trim();
+      const discordName = discordUsernameInput.value; // Get from the pre-filled input
+      const discordUserId = discordUsernameInput.dataset.userId; // Get user ID
 
       if (!serviceChoice) {
-        showMessage("من فضلك، اختار نوع الخدمة أولاً.", "error");
+        showMessage(messageDisplay, "من فضلك، اختار نوع الخدمة أولاً.", "error");
         return;
       }
-      if (!discordName) {
-        showMessage("من فضلك، أدخل اسم حسابك على الديسكورد.", "error");
-        return;
-      }
+      // Discord name is pre-filled, so no need for this check unless you allow manual entry
+      // if (!discordName) {
+      //   showMessage("من فضلك، أدخل اسم حسابك على الديسكورد.", "error");
+      //   return;
+      // }
 
       if (serviceChoice === "minecraft") {
         const requiredMinecraftFields = ["ram", "cpu", "disk", "version", "software", "java"];
         for (const field of requiredMinecraftFields) {
           if (!data.get(field)) {
-            showMessage(`من فضلك، اختار ${getFieldNameArabic(field)} لسيرفر الماينكرافت.`, "error");
+            showMessage(messageDisplay, `من فضلك، اختار ${getFieldNameArabic(field)} لسيرفر الماينكرافت.`, "error");
             return;
           }
         }
         if (data.get("software") === "Paper" && !data.get("paperBuild")) {
-            showMessage("من فضلك، اختار إصدار Paper.", "error");
+            showMessage(messageDisplay, "من فضلك، اختار إصدار Paper.", "error");
             return;
         }
       } else if (serviceChoice === "discord") {
         const requiredDiscordFields = ["bot-language", "ram-discord"];
         for (const field of requiredDiscordFields) {
           if (!data.get(field)) {
-            showMessage(`من فضلك، اختار ${getFieldNameArabic(field)} لبوت الديسكورد.`, "error");
+            showMessage(messageDisplay, `من فضلك، اختار ${getFieldNameArabic(field)} لبوت الديسكورد.`, "error");
             return;
           }
         }
       }
 
-      let messageContent = `📥 **طلب استضافة جديد وصل يا جدعان!**\n\n`;
+      let messageContent = `📥 **طلب استضافة جديد وصل يا حبايبب*\n\n`;
 
       if (serviceChoice === "minecraft") {
         messageContent += `🔧 **النوع**: سيرفر ماينكرافت\n`;
@@ -489,10 +780,10 @@
         messageContent += `📊 **مواصفات البوت**: ${data.get("ram-discord")}\n`;
       }
       
-      messageContent += `\n💬 **حساب الديسكورد**: ${discordName}\n`;
+      messageContent += `\n💬 **حساب الديسكورد**: ${discordName} (ID: ${discordUserId})\n`;
       messageContent += `📝 **ملاحظات**: ${data.get("notes") || "مفيش ملاحظات زيادة"}`;
 
-      showMessage("جاري إرسال طلبك...", "info");
+      showMessage(messageDisplay, "جاري إرسال طلبك...", "info");
 
       fetch("https://discord.com/api/webhooks/1389455045216440474/B8TyS5qyEMk1O1ejfEJogQawYsj42ISgEUSmd0NCkPr3STrebgeSUNIa992Zn20GSL5v", {
         method: "POST",
@@ -500,28 +791,28 @@
         body: JSON.stringify({ content: messageContent })
       }).then(response => {
           if (response.ok) {
-            showMessage("✅ طلبك اتبعت بنجاح يا ريس!", "success");
+            showMessage(messageDisplay, "✅ طلبك اتبعت بنجاح يا ريس!", "success");
             e.target.reset();
             mcFields.style.display = "none";
             discordFields.style.display = "none";
             paperBuilds.style.display = "none";
           } else {
-            showMessage("❌ معلش، في حاجة غلط حصلت. جرب تاني يا معلم!", "error");
+            showMessage(messageDisplay, "❌ معلش، في حاجة غلط حصلت. جرب تاني يا معلم!", "error");
             console.error("Discord Webhook Error:", response.status, response.statusText);
           }
       }).catch(err => {
-        showMessage("❌ معلش، في حاجة غلط حصلت. جرب تاني يا معلم!", "error");
+        showMessage(messageDisplay, "❌ معلش، في حاجة غلط حصلت. جرب تاني يا معلم!", "error");
         console.error(err);
       });
     });
 
-    function showMessage(message, type) {
-        messageDisplay.textContent = message;
-        messageDisplay.className = 'message-display ' + type;
-        messageDisplay.style.display = "block";
+    function showMessage(element, message, type) {
+        element.textContent = message;
+        element.className = 'message-display ' + type;
+        element.style.display = "block";
 
         setTimeout(() => {
-            messageDisplay.style.display = "none";
+            element.style.display = "none";
         }, 5000);
     }
 
@@ -541,3 +832,4 @@
   </script>
 </body>
 </html>
+
